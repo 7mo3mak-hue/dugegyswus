@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akhbar Alyoum Academy — Business Administration</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     LOGIN PAGE
+══════════════════════════════════════ -->
+<div id="page-login">
+
+  <div class="login-left">
+    <div class="login-brand">
+      <div class="crest"><i class="ti ti-school"></i></div>
+      <h1>Akhbar Alyoum<br>Academy</h1>
+      <p class="dept">Department of Business Administration</p>
+      <p class="tagline">
+        Your academic portal for course information, schedules,
+        and announcements — all in one place.
+      </p>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="login-form-wrap">
+      <h2>Student Sign In</h2>
+      <p class="subtitle">Enter your credentials to access your portal</p>
+
+      <div class="field" id="field-sid">
+        <label for="sid">Student ID</label>
+        <input type="text" id="sid" placeholder="e.g. BBA-2024-001" autocomplete="off" />
+        <div class="error-msg" id="err-sid"></div>
+      </div>
+
+      <div class="field" id="field-pwd">
+        <label for="pwd">Password</label>
+        <input type="password" id="pwd" placeholder="Enter your password" />
+        <div class="error-msg" id="err-pwd"></div>
+      </div>
+
+      <button class="btn-primary" onclick="doLogin()">
+        <i class="ti ti-login"></i> Sign in
+      </button>
+
+      <div class="demo-hint">
+        <strong>Demo accounts</strong>
+        <table>
+          <tr><td><strong>ID</strong></td><td><strong>Password</strong></td><td><strong>Year</strong></td></tr>
+          <tr><td>BBA-2024-001</td><td>1234</td><td>3rd Year</td></tr>
+          <tr><td>BBA-2024-002</td><td>1234</td><td>1st Year</td></tr>
+          <tr><td>BBA-2024-003</td><td>1234</td><td>2nd Year</td></tr>
+          <tr><td>BBA-2024-004</td><td>1234</td><td>4th Year</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-login -->
+
+
+<!-- ══════════════════════════════════════
+     APP SHELL
+══════════════════════════════════════ -->
+<div id="page-app" class="hidden">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="icon-wrap"><i class="ti ti-school"></i></div>
+        <div class="sidebar-logo-text">
+          <div class="name">Akhbar Alyoum</div>
+          <div class="dept">Business Admin</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Main</div>
+      <button class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+        <i class="ti ti-layout-dashboard"></i> Dashboard
+      </button>
+      <button class="nav-item" data-page="subjects" onclick="navigate('subjects')">
+        <i class="ti ti-books"></i> My Subjects
+      </button>
+      <button class="nav-item" data-page="schedule" onclick="navigate('schedule')">
+        <i class="ti ti-calendar-week"></i> Schedule
+      </button>
+
+      <div class="nav-section-title">Info</div>
+      <button class="nav-item" data-page="announcements" onclick="navigate('announcements')">
+        <i class="ti ti-speakerphone"></i> Announcements
+        <span class="ann-badge" id="ann-badge" style="margin-left:auto;background:#c8922a;color:#fff;font-size:.65rem;padding:1px 6px;border-radius:20px;">4</span>
+      </button>
+      <button class="nav-item" data-page="profile" onclick="navigate('profile')">
+        <i class="ti ti-user-circle"></i> My Profile
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="avatar" id="sb-avatar">ST</div>
+        <div class="sidebar-user-info">
+          <div class="user-name" id="sb-name">Student</div>
+          <div class="user-id" id="sb-id">BBA-0000-000</div>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="doLogout()">
+        <i class="ti ti-logout"></i> Sign out
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main area -->
+  <div class="main-content">
+    <div class="topbar">
+      <div>
+        <h2 id="topbar-title">Dashboard</h2>
+        <div class="topbar-meta" id="topbar-meta">Business Administration Portal</div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-date">
+          <i class="ti ti-calendar"></i>
+          <span id="topbar-date"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-body">
+
+      <!-- DASHBOARD -->
+      <section id="page-dashboard">
+
+        <div class="welcome-bar">
+          <div class="avatar-lg" id="dash-avatar">ST</div>
+          <div>
+            <h3 id="dash-welcome">Welcome back!</h3>
+            <p id="dash-sub">Loading your academic profile…</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="label">Academic Year</div>
+            <div class="value" id="stat-year">—</div>
+            <div class="sub">Current enrollment</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Subjects</div>
+            <div class="value" id="stat-subjects">—</div>
+            <div class="sub">This semester</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Credit Hours</div>
+            <div class="value" id="stat-credits">—</div>
+            <div class="sub">Registered</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Semester</div>
+            <div class="value" style="font-size:1rem;padding-top:.3rem;" id="stat-semester">—</div>
+            <div class="sub">Academic year</div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <!-- Subject quick list -->
+          <div class="card">
+            <div class="card-header">
+              <h3><i class="ti ti-books"></i> My Subjects</h3>
+              <button class="view-all" onclick="navigate('subjects')">View all →</button>
+            </div>
+            <div class="card-body" id="dash-subjects-list"></div>
+          </div>
+
+          <!-- Announcements -->
+          <div class="card">
+            <div class="card-header">
+              <h3><i class="ti ti-speakerphone"></i> Announcements</h3>
+              <button class="view-all" onclick="navigate('announcements')">View all →</button>
+            </div>
+            <div class="card-body" id="dash-announcements"></div>
+          </div>
+        </div>
+
+      </section><!-- /dashboard -->
+
+
+      <!-- SUBJECTS -->
+      <section id="page-subjects" class="hidden">
+        <div class="page-header">
+          <h2>My Subjects</h2>
+          <p id="subj-page-meta">All registered subjects for this semester</p>
+        </div>
+        <div class="subjects-grid" id="subjects-grid"></div>
+      </section>
+
+
+      <!-- SCHEDULE -->
+      <section id="page-schedule" class="hidden">
+        <div class="page-header">
+          <h2>Weekly Schedule</h2>
+          <p id="sched-meta">All subjects with meeting times and rooms</p>
+        </div>
+        <div class="card">
+          <div class="schedule-table-wrap">
+            <table class="schedule-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Subject</th>
+                  <th>Code</th>
+                  <th>Instructor</th>
+                  <th>Schedule</th>
+                  <th>Room</th>
+                  <th>Credits</th>
+                </tr>
+              </thead>
+              <tbody id="schedule-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ANNOUNCEMENTS -->
+      <section id="page-announcements" class="hidden">
+        <div class="page-header">
+          <h2>Announcements</h2>
+          <p>Latest news and notices from the department</p>
+        </div>
+        <div id="announcements-list"></div>
+      </section>
+
+
+      <!-- PROFILE -->
+      <section id="page-profile" class="hidden">
+        <div class="profile-hero">
+          <div class="avatar-xl" id="prof-avatar">ST</div>
+          <div>
+            <h2 id="prof-name">Student Name</h2>
+            <p id="prof-dept">Department of Business Administration</p>
+          </div>
+          <div class="profile-badge">
+            <div class="gpa-label">GPA</div>
+            <div class="gpa-value" id="prof-gpa">—</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><h3><i class="ti ti-id-badge"></i> Academic Information</h3></div>
+          <div class="card-body">
+            <div class="info-grid">
+              <div class="info-row"><span class="lbl">Student ID</span><span class="val" id="pi-id">—</span></div>
+              <div class="info-row"><span class="lbl">Full Name</span><span class="val" id="pi-name">—</span></div>
+              <div class="info-row"><span class="lbl">Academic Year</span><span class="val" id="pi-year">—</span></div>
+              <div class="info-row"><span class="lbl">Department</span><span class="val">Business Administration</span></div>
+              <div class="info-row"><span class="lbl">Faculty</span><span class="val">Commerce &amp; Business</span></div>
+              <div class="info-row"><span class="lbl">Semester</span><span class="val" id="pi-sem">—</span></div>
+              <div class="info-row"><span class="lbl">Registered Credits</span><span class="val" id="pi-credits">—</span></div>
+              <div class="info-row"><span class="lbl">Enrollment Status</span><span class="val" style="color:#15803d;">✓ Active</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /page-body -->
+  </div><!-- /main-content -->
+
+</div><!-- /page-app -->
+
+<script src="./data.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
